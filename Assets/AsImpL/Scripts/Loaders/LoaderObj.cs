@@ -88,6 +88,7 @@ namespace AsImpL
         protected override IEnumerator LoadModelFile(string absolutePath)
         {
             string url = absolutePath.Contains("//") ? absolutePath : "file:///" + absolutePath;
+            Debug.Log("url"+url);
             yield return LoadOrDownloadText(url);
 
             if (string.IsNullOrEmpty(loadedText))
@@ -121,6 +122,7 @@ namespace AsImpL
                     pos = absolutePath.LastIndexOf('/');
                 }
                 mtlPath = absolutePath.Remove(pos + 1) + mtlLib;
+                Debug.Log("mtlPath" + mtlPath);
             }
             else
             {
@@ -520,6 +522,10 @@ namespace AsImpL
                     Debug.LogErrorFormat("Error at line {0} in mtl file: {1}", i + 1, e);
                 }
             }
+            Debug.Log("current material");
+            Debug.Log("ambientColor" + current.ambientColor);
+            Debug.Log("diffuseColor" + current.diffuseColor);
+            Debug.Log("specularColor" + current.specularColor);
         }
 
 
@@ -637,6 +643,7 @@ namespace AsImpL
             {
                 // Get downloaded asset bundle
                 loadedText = uwr.downloadHandler.text;
+                Debug.Log("for url "+ url + "text loaded /n" + loadedText);
             }
 #else
             WWW www = new WWW(url);
